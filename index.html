@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="ru">
+<script>document.documentElement.classList.add("js")</script>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Omad Web Studio</title>
+<meta name="description" content="Сайты для бизнеса в Ташкенте: лендинги, сайты для кафе, салонов и магазинов. Быстро, под телефон, с заявками в Telegram.">
+<meta name="theme-color" content="#04070F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#04070F; --ink:#EEF3FF; --muted:#8E9BBD; --dim:#5B6789;
+  --blue:#2F7BFF; --blue2:#7FB2FF; --deep:#1238C9; --green:#3DDC84;
+  --glass:rgba(140,170,255,.07); --glass2:rgba(140,170,255,.12); --stroke:rgba(160,190,255,.18);
+  --d:"Unbounded","Arial Black",sans-serif; --b:"Manrope",system-ui,sans-serif; --m:"JetBrains Mono",ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font-family:var(--b);font-size:16px;line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--d);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left))}
+:focus-visible{outline:2px solid var(--blue2);outline-offset:3px;border-radius:8px}
+
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bg::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(127,178,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(127,178,255,.05) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 20%,#000 20%,transparent 75%)}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;animation:float 18s ease-in-out infinite alternate}
+.o1{width:620px;height:620px;background:#1238C9;top:-200px;left:-160px}
+.o2{width:520px;height:520px;background:#2F7BFF;top:30%;right:-220px;opacity:.35;animation-delay:-6s}
+.o3{width:420px;height:420px;background:#5B2FFF;bottom:-180px;left:20%;opacity:.25;animation-delay:-12s}
+@keyframes float{to{transform:translate(60px,40px) scale(1.1)}}
+
+.glass{background:linear-gradient(160deg,var(--glass2),var(--glass));border:1px solid var(--stroke);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);border-radius:24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 30px 60px -30px rgba(0,0,0,.7)}
+.hud{position:relative;background:linear-gradient(160deg,rgba(47,123,255,.10),rgba(10,18,40,.55));clip-path:polygon(22px 0,100% 0,100% calc(100% - 22px),calc(100% - 22px) 100%,0 100%,0 22px)}
+.hud::before{content:"";position:absolute;inset:0;padding:1px;background:linear-gradient(135deg,var(--blue2),rgba(127,178,255,.12) 40%,rgba(127,178,255,.12) 60%,var(--blue));clip-path:inherit;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.ticks{display:inline-flex;gap:4px}
+.ticks i{width:4px;height:12px;background:var(--blue2);transform:skewX(-25deg);opacity:.7}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--m);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue2)}
+
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:999px;font-weight:800;font-size:15px;transition:transform .2s,box-shadow .2s;white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn-p{background:linear-gradient(135deg,#4A90FF,var(--deep));box-shadow:0 18px 40px -14px rgba(47,123,255,.9),inset 0 1px 0 rgba(255,255,255,.3)}
+.btn-p:hover{box-shadow:0 22px 50px -12px rgba(47,123,255,1),inset 0 1px 0 rgba(255,255,255,.3)}
+.btn-g{background:var(--glass2);border:1px solid var(--stroke);backdrop-filter:blur(12px)}
+.btn svg{width:18px;height:18px}
+
+.nav{position:sticky;top:12px;z-index:50;margin-top:12px}
+.nav .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 10px 10px 18px;border-radius:999px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--d);font-weight:800;font-size:16px}
+.logo i{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:8.5px;font-weight:900;background:linear-gradient(145deg,var(--blue),var(--deep));box-shadow:0 0 24px -4px var(--blue)}
+.links{display:flex;gap:4px}
+.links a{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;font-weight:700;font-size:14px;color:var(--muted);transition:.2s}
+.links a:hover{color:var(--ink);background:var(--glass2)}
+.links svg{width:17px;height:17px}
+.nav .btn{padding:11px 18px;font-size:14px}
+@media (max-width:860px){.links{display:none}}
+
+.hero{padding:70px 0 40px;display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:center}
+.hero>*{min-width:0}
+.hero h1{font-size:clamp(40px,6.4vw,84px);font-weight:900;margin-top:22px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--blue2),var(--blue) 60%,#8C6BFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(17px,1.6vw,19px);color:var(--muted);max-width:46ch;margin-top:24px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.trust{display:flex;align-items:center;gap:14px;margin-top:34px;color:var(--muted);font-size:14px}
+.trust .dot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(61,220,132,.15);animation:blink 2s infinite}
+@keyframes blink{50%{box-shadow:0 0 0 9px rgba(61,220,132,0)}}
+
+.stage{position:relative;height:560px;perspective:1400px}
+.stage>*{position:absolute}
+.w-site{inset:40px 30px 60px 50px;padding:16px;transform:rotateY(-14deg) rotateX(6deg);animation:bob 7s ease-in-out infinite}
+.w-site .chrome{display:flex;gap:6px;align-items:center;margin-bottom:12px}
+.w-site .chrome i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.2)}
+.w-site .chrome span{margin-left:10px;flex:1;font-family:var(--m);font-size:11px;color:var(--muted);background:rgba(0,0,0,.25);padding:5px 12px;border-radius:999px}
+.w-site .shot{height:calc(100% - 30px);border-radius:16px;overflow:hidden;background:linear-gradient(170deg,#3A2416,#160D08);padding:26px;display:flex;flex-direction:column;gap:12px;position:relative}
+.shot::after{content:"";position:absolute;right:-60px;bottom:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,#E7B07A 0,#A8653A 40%,transparent 70%);opacity:.55}
+.shot small{font-family:var(--m);font-size:11px;color:#E7B07A;letter-spacing:.1em}
+.shot b{font-family:var(--d);font-size:30px;line-height:1.05;color:#FBEBD8;max-width:9ch;position:relative;z-index:1}
+.shot .pill{align-self:flex-start;background:#E7B07A;color:#2B1D16;font-size:12px;font-weight:800;padding:9px 16px;border-radius:999px;position:relative;z-index:1}
+.shot .row{display:flex;gap:10px;margin-top:auto;position:relative;z-index:1}
+.shot .row div{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:10px;font-size:11px;color:#F6E7D6}
+.shot .row div s{display:block;text-decoration:none;font-weight:800;font-size:13px}
+.w-stat{top:0;right:0;padding:18px 22px;animation:bob 6s -2s ease-in-out infinite}
+.w-stat small{font-size:12px;color:var(--muted)}
+.w-stat b{display:block;font-family:var(--d);font-size:34px;margin-top:4px}
+.w-stat .spark{display:flex;gap:4px;align-items:flex-end;height:28px;margin-top:8px}
+.w-stat .spark i{width:8px;border-radius:3px;background:linear-gradient(var(--blue2),var(--blue))}
+.w-msg{bottom:20px;left:0;display:flex;gap:12px;align-items:center;padding:14px 18px 14px 14px;max-width:300px;animation:bob 6.5s -4s ease-in-out infinite}
+.w-msg .ic{flex:none;width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#2AABEE,#1E88D0)}
+.w-msg .ic svg{width:22px;height:22px}
+.w-msg small{display:block;font-size:11px;color:var(--muted)}
+.w-msg p{font-size:14px;font-weight:700;line-height:1.3}
+.w-speed{bottom:170px;right:-6px;padding:14px 18px;display:flex;align-items:center;gap:12px;animation:bob 8s -1s ease-in-out infinite}
+.ring{width:48px;height:48px;border-radius:50%;background:conic-gradient(var(--green) 0 97%,rgba(255,255,255,.1) 0);display:grid;place-items:center}
+.ring::after{content:"97";width:38px;height:38px;border-radius:50%;background:#0A1328;display:grid;place-items:center;font-family:var(--m);font-weight:700;font-size:13px}
+.w-speed small{display:block;font-size:11px;color:var(--muted)}
+.w-speed b{font-size:14px}
+@keyframes bob{50%{translate:0 -12px}}
+@media (max-width:960px){.hero{grid-template-columns:1fr;padding-top:44px}.stage{height:460px;max-width:520px;width:100%;margin-inline:auto}}
+@media (max-width:520px){.stage{height:400px}.w-site{inset:50px 0 70px 10px}.w-speed{display:none}.w-msg{max-width:250px}}
+
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:40px 0 0}
+.facts>*{min-width:0}
+.fact{padding:22px 24px}
+.fact b{display:block;font-family:var(--d);font-size:clamp(24px,3vw,34px);font-weight:800}
+.fact span{color:var(--muted);font-size:14px}
+@media (max-width:820px){.facts{grid-template-columns:repeat(2,1fr)}}
+
+section{padding:110px 0 0}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:18px;margin-bottom:44px}
+.head h2{font-size:clamp(30px,4.6vw,56px);font-weight:800;margin-top:14px}
+.head p{color:var(--muted);max-width:40ch}
+
+.carousel{position:relative;overflow-x:clip;height:540px;perspective:1600px;touch-action:pan-y;user-select:none}
+.card{position:absolute;left:50%;top:0;width:min(380px,78vw);height:500px;margin-left:calc(min(380px,78vw) / -2);border-radius:28px;overflow:hidden;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .7s,filter .7s;cursor:pointer;border:1px solid var(--stroke);box-shadow:0 40px 80px -30px rgba(0,0,0,.9)}
+.card .art{position:absolute;inset:0}
+.card .info{position:absolute;left:14px;right:14px;bottom:14px;padding:20px;border-radius:20px;background:rgba(8,12,26,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.12)}
+.card .info .t{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.card .info h3{font-size:21px;font-weight:700}
+.card .info .n{font-family:var(--m);font-size:12px;color:var(--muted)}
+.card .info p{color:#C3CCE4;font-size:14px;margin-top:8px;line-height:1.45}
+.card .info .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.card .info .tags span{font-family:var(--m);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.08);color:#D6DDF0}
+.c-ctrl{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:10px}
+.c-ctrl button{width:52px;height:52px;border-radius:50%;border:1px solid var(--stroke);background:var(--glass2);color:var(--ink);display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(12px);transition:.2s}
+.c-ctrl button:hover{background:var(--blue);border-color:var(--blue)}
+.c-ctrl svg{width:20px;height:20px}
+.dots{display:flex;gap:7px}
+.dots i{width:7px;height:7px;border-radius:999px;background:rgba(255,255,255,.25);transition:.3s}
+.dots i.on{width:24px;background:var(--blue)}
+@media (max-width:520px){.carousel{height:470px}.card{height:440px}}
+
+.a-cafe{background:radial-gradient(circle at 75% 25%,#E7B07A 0,#A8653A 18%,transparent 45%),linear-gradient(170deg,#3A2416,#120A06)}
+.a-barber{background:radial-gradient(circle at 30% 20%,#C9A45C 0,transparent 35%),repeating-linear-gradient(135deg,#1A1A1A 0 18px,#222 18px 36px)}
+.a-salon{background:radial-gradient(circle at 70% 30%,#FFB3CF 0,#C04A7B 25%,transparent 55%),linear-gradient(170deg,#3B1428,#14060D)}
+.a-shop{background:radial-gradient(circle at 30% 30%,#9BE38E 0,#2E8B57 22%,transparent 50%),linear-gradient(170deg,#0F2A1C,#06120C)}
+.a-fit{background:radial-gradient(circle at 70% 25%,#FFD24A 0,#FF7A1A 22%,transparent 50%),linear-gradient(170deg,#2A1606,#0E0703)}
+.mini{position:absolute;left:24px;right:24px;top:26px;display:flex;flex-direction:column;gap:10px}
+.mini small{font-family:var(--m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.mini b{font-family:var(--d);font-size:30px;line-height:1.04;max-width:10ch}
+.mini .pill{align-self:flex-start;font-size:12px;font-weight:800;padding:9px 16px;border-radius:999px;margin-top:6px}
+
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.services>*{min-width:0}
+.svc{padding:30px 28px 28px;display:flex;flex-direction:column;gap:14px;transition:transform .3s}
+.svc:hover{transform:translateY(-4px)}
+.svc .top{display:flex;justify-content:space-between;align-items:center}
+.svc .ico{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:rgba(47,123,255,.16);border:1px solid rgba(127,178,255,.3);color:var(--blue2)}
+.svc .ico svg{width:24px;height:24px}
+.svc h3{font-size:21px;font-weight:700}
+.svc p{color:var(--muted);font-size:15px;flex:1}
+.svc .price{display:flex;justify-content:space-between;align-items:end;gap:10px;padding-top:16px;border-top:1px dashed rgba(127,178,255,.22)}
+.svc .price b{font-family:var(--d);font-size:19px;font-weight:700}
+.svc .price span{font-family:var(--m);font-size:12px;color:var(--muted);text-align:right}
+.svc.hot{background:linear-gradient(160deg,rgba(47,123,255,.32),rgba(18,56,201,.18))}
+.badge{font-family:var(--m);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:var(--blue);box-shadow:0 0 20px -2px var(--blue)}
+@media (max-width:960px){.services{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.services{grid-template-columns:1fr}}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative}
+.steps>*{min-width:0}
+.steps::before{content:"";position:absolute;left:4%;right:4%;top:46px;height:2px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:.5}
+.step{padding:24px;position:relative}
+.step .num{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--m);font-weight:700;font-size:14px;background:#0A1328;border:1px solid var(--blue);box-shadow:0 0 22px -4px var(--blue);margin-bottom:18px}
+.step h3{font-size:18px;font-weight:700}
+.step p{color:var(--muted);font-size:14px;margin-top:8px}
+.step .when{display:inline-block;margin-top:14px;font-family:var(--m);font-size:12px;color:var(--blue2)}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}.steps::before{display:none}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+
+.why{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:16px}
+.why>*{min-width:0}
+.why .big{grid-row:span 2;padding:34px;display:flex;flex-direction:column;justify-content:space-between;gap:30px;background:linear-gradient(160deg,rgba(47,123,255,.22),rgba(10,18,40,.4))}
+.why .big h3{font-size:clamp(24px,2.6vw,32px);font-weight:800}
+.why .big p{color:#B7C3E3;margin-top:12px}
+.phone{align-self:center;width:190px;height:270px;border-radius:30px;border:6px solid #1A2240;background:linear-gradient(170deg,#0D1A3D,#060B1C);padding:16px 12px;display:flex;flex-direction:column;gap:8px;box-shadow:0 30px 60px -20px rgba(47,123,255,.6)}
+.phone i{display:block;border-radius:8px;background:rgba(127,178,255,.16);height:14px}
+.phone i:nth-child(1){height:70px;background:linear-gradient(135deg,var(--blue),var(--deep))}
+.phone i:nth-child(2){width:70%}
+.phone i:last-child{margin-top:auto;height:30px;border-radius:999px;background:var(--blue)}
+.why .sm{padding:26px}
+.why .sm .ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:rgba(47,123,255,.16);color:var(--blue2);margin-bottom:16px}
+.why .sm .ico svg{width:22px;height:22px}
+.why .sm h3{font-size:18px;font-weight:700}
+.why .sm p{color:var(--muted);font-size:14px;margin-top:6px}
+@media (max-width:900px){.why{grid-template-columns:1fr 1fr}.why .big{grid-column:1/-1;grid-row:auto}}
+@media (max-width:560px){.why{grid-template-columns:1fr}}
+
+.contact{margin-top:110px;padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;background:radial-gradient(circle at 0% 0%,rgba(47,123,255,.45),transparent 55%),linear-gradient(160deg,rgba(18,56,201,.35),rgba(6,10,24,.8))}
+.contact>*{min-width:0}
+.contact h2{font-size:clamp(30px,4.6vw,58px);font-weight:900}
+.contact p{color:#B7C3E3;margin-top:16px;max-width:44ch}
+.chans{display:grid;gap:12px}
+.chan{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);transition:.2s}
+a.chan:hover{background:rgba(255,255,255,.12);transform:translateX(4px)}
+.chan .ic{flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center}
+.chan .ic svg{width:22px;height:22px}
+.chan small{display:block;font-size:12px;color:var(--muted)}
+.chan b{font-family:var(--m);font-weight:700;font-size:15px}
+.chan .go{margin-left:auto;color:var(--muted);flex:none}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+
+footer{padding:40px 0 120px;color:var(--dim);font-size:13px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+.dock{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;display:none;gap:4px;padding:6px;border-radius:999px}
+.dock a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 14px;border-radius:999px;font-size:10.5px;font-weight:700;color:var(--muted)}
+.dock a svg{width:20px;height:20px}
+.dock a.main{background:linear-gradient(135deg,#4A90FF,var(--deep));color:#fff;box-shadow:0 0 24px -4px var(--blue)}
+@media (max-width:860px){.dock{display:flex}.orb{filter:blur(60px);animation:none}}
+
+.js .rv{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.5"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 10 14"/><path d="m21 3-7 18-4-7-7-4z"/></symbol>
+  <symbol id="i-tg" viewBox="0 0 24 24" fill="#fff"><path d="M21.5 4.3 18.4 19c-.2 1-.9 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.8-8c.4-.3-.1-.5-.6-.2L6.3 12.9l-4.6-1.4c-1-.3-1-1 .2-1.5L20 3.1c.8-.3 1.6.2 1.5 1.2z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-page" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+  <symbol id="i-build" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.5 12h11.5l2-8H6.2"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="8" cy="8" r="1.5"/></symbol>
+  <symbol id="i-mega" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 10v4h4l8 5V5L7 10z"/><path d="M19 9a4 4 0 0 1 0 6"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-insta" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff"/></symbol>
+</svg>
+
+<div class="wrap">
+  <nav class="nav">
+    <div class="bar glass">
+      <a class="logo" href="#top"><i>OMAD</i>Omad Web</a>
+      <div class="links">
+        <a href="#works"><svg><use href="#i-grid"/></svg>Работы</a>
+        <a href="#services"><svg><use href="#i-layers"/></svg>Услуги</a>
+        <a href="#process"><svg><use href="#i-route"/></svg>Процесс</a>
+      </div>
+      <a class="btn btn-p" href="#contact"><svg><use href="#i-send"/></svg>Написать</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div>
+      <div class="eyebrow"><span class="ticks"><i></i><i></i><i></i></span>Веб-студия · Ташкент</div>
+      <h1>Сайты, которые <em>приводят клиентов</em></h1>
+      <p class="lead">Делаю современные сайты для кафе, салонов, магазинов и экспертов. Быстро открываются с телефона, выглядят дорого и ведут человека к заявке в Telegram.</p>
+      <div class="cta">
+        <a class="btn btn-p" href="#contact">Обсудить проект<svg><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-g" href="#works">Смотреть работы</a>
+      </div>
+      <div class="trust"><span class="dot"></span>Сейчас беру новые проекты · консультация бесплатно</div>
+    </div>
+
+    <div class="stage" aria-hidden="true">
+      <div class="w-site glass">
+        <div class="chrome"><i></i><i></i><i></i><span>coffee-lab.uz</span></div>
+        <div class="shot">
+          <small>КОФЕЙНЯ · ТАШКЕНТ</small>
+          <b>Кофе с собой за 5 минут</b>
+          <span class="pill">Заказать в Telegram</span>
+          <div class="row"><div>Капучино<s>28 000</s></div><div>Латте<s>30 000</s></div><div>Раф<s>32 000</s></div></div>
+        </div>
+      </div>
+      <div class="w-stat glass"><small>Заявки за месяц</small><b>+184%</b>
+        <div class="spark"><i style="height:30%"></i><i style="height:45%"></i><i style="height:40%"></i><i style="height:62%"></i><i style="height:70%"></i><i style="height:100%"></i></div>
+      </div>
+      <div class="w-speed glass"><div class="ring"></div><div><small>Скорость сайта</small><b>Отлично</b></div></div>
+      <div class="w-msg glass"><div class="ic"><svg><use href="#i-tg"/></svg></div><div><small>Новая заявка · сейчас</small><p>«Хочу заказать 2 капучино с собой ☕»</p></div></div>
+    </div>
+  </header>
+
+  <div class="facts">
+    <div class="fact glass rv"><b>3–7</b><span>дней на лендинг</span></div>
+    <div class="fact glass rv"><b>100%</b><span>удобно с телефона</span></div>
+    <div class="fact glass rv"><b>RU · UZ</b><span>два языка</span></div>
+    <div class="fact glass rv"><b>24/7</b><span>сайт работает за вас</span></div>
+  </div>
+
+  <section id="works">
+    <div class="head rv">
+      <div><div class="eyebrow"><span class="ticks"><i></i><i></i><i></i></span>Портфолио</div><h2>Примеры работ</h2></div>
+      <p>Листайте карточки ← → Концепты, которые показывают, каким может быть ваш сайт.</p>
+    </div>
+    <div class="carousel rv" id="car" tabindex="0" aria-label="Карусель работ, листайте стрелками">
+      <article class="card"><div class="art a-cafe"></div>
+        <div class="mini" style="color:#FBEBD8"><small>Кафе · Чорсу</small><b>Утро начинается здесь</b><span class="pill" style="background:#E7B07A;color:#2B1D16">Меню и доставка</span></div>
+        <div class="info"><div class="t"><h3>Coffee Lab</h3><span class="n">01 / 05</span></div><p>Меню с ценами, фото зала и заказ доставки в Telegram в один клик.</p><div class="tags"><span>Лендинг</span><span>Telegram</span><span>RU/UZ</span></div></div>
+      </article>
+      <article class="card"><div class="art a-barber"></div>
+        <div class="mini" style="color:#F2E6CC"><small>Барбершоп · Мирабад</small><b>Стрижка, которую замечают</b><span class="pill" style="background:#C9A45C;color:#1A1A1A">Записаться онлайн</span></div>
+        <div class="info"><div class="t"><h3>Blade Barbers</h3><span class="n">02 / 05</span></div><p>Мастера, прайс и онлайн-запись на свободное время без звонков.</p><div class="tags"><span>Сайт</span><span>Онлайн-запись</span></div></div>
+      </article>
+      <article class="card"><div class="art a-salon"></div>
+        <div class="mini" style="color:#FFE6EF"><small>Салон красоты · Юнусабад</small><b>Запись за 30 секунд</b><span class="pill" style="background:#fff;color:#8E2A55">Выбрать время</span></div>
+        <div class="info"><div class="t"><h3>Bella Studio</h3><span class="n">03 / 05</span></div><p>Услуги, работы мастеров и запись на удобное время прямо с телефона.</p><div class="tags"><span>Сайт</span><span>Галерея</span><span>Запись</span></div></div>
+      </article>
+      <article class="card"><div class="art a-shop"></div>
+        <div class="mini" style="color:#E4FBE0"><small>Магазин · доставка</small><b>Свежие продукты к двери</b><span class="pill" style="background:#9BE38E;color:#0F2A1C">В корзину</span></div>
+        <div class="info"><div class="t"><h3>Bozor Market</h3><span class="n">04 / 05</span></div><p>Каталог с фото и ценами, корзина и заказ с доставкой по Ташкенту.</p><div class="tags"><span>Магазин</span><span>Корзина</span></div></div>
+      </article>
+      <article class="card"><div class="art a-fit"></div>
+        <div class="mini" style="color:#FFF1D6"><small>Фитнес-клуб</small><b>Первая тренировка бесплатно</b><span class="pill" style="background:#FFD24A;color:#2A1606">Получить пробную</span></div>
+        <div class="info"><div class="t"><h3>Power Gym</h3><span class="n">05 / 05</span></div><p>Абонементы, расписание тренеров и заявка на пробное занятие.</p><div class="tags"><span>Лендинг</span><span>Заявки</span></div></div>
+      </article>
+    </div>
+    <div class="c-ctrl">
+      <button id="prev" aria-label="Предыдущая работа"><svg><use href="#i-left"/></svg></button>
+      <div class="dots" id="dots"></div>
+      <button id="next" aria-label="Следующая работа"><svg><use href="#i-right"/></svg></button>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="head rv">
+      <div><div class="eyebrow"><span class="ticks"><i></i><i></i><i></i></span>Услуги и цены</div><h2>Что я делаю</h2></div>
+      <p>Цены открыто, без «по запросу». Точную сумму назову после короткого разговора о вашей задаче.</p>
+    </div>
+    <div class="services">
+      <div class="svc hud hot rv"><div class="top"><div class="ico"><svg><use href="#i-page"/></svg></div><span class="badge">Популярно</span></div>
+        <h3>Лендинг</h3><p>Одна страница о вашем товаре или услуге: кто вы, что предлагаете, цены, отзывы и кнопка заявки.</p>
+        <div class="price"><b>от 1 500 000 сум</b><span>3–7 дней</span></div></div>
+      <div class="svc hud rv"><div class="top"><div class="ico"><svg><use href="#i-build"/></svg></div><span class="ticks"><i></i><i></i></span></div>
+        <h3>Сайт для бизнеса</h3><p>Несколько страниц: меню или услуги, галерея, о компании, карта, онлайн-запись.</p>
+        <div class="price"><b>от 3 000 000 сум</b><span>1–2 недели</span></div></div>
+      <div class="svc hud rv"><div class="top"><div class="ico"><svg><use href="#i-cart"/></svg></div><span class="ticks"><i></i><i></i></span></div>
+        <h3>Интернет-магазин</h3><p>Каталог товаров с фото и ценами, корзина и заказ через Telegram или по телефону.</p>
+        <div class="price"><b>от 5 000 000 сум</b><span>2–3 недели</span></div></div>
+      <div class="svc hud rv"><div class="top"><div class="ico"><svg><use href="#i-tag"/></svg></div><span class="ticks"><i></i><i></i></span></div>
+        <h3>Карточки Wildberries и Uzum</h3><p>Продающая инфографика для маркетплейсов: преимущества крупно, размеры и состав. Чтобы товар выделялся в поиске.</p>
+        <div class="price"><b>от 100 000 сум</b><span>за карточку · 1–2 дня</span></div></div>
+      <div class="svc hud rv"><div class="top"><div class="ico"><svg><use href="#i-mega"/></svg></div><span class="ticks"><i></i><i></i></span></div>
+        <h3>Продвижение</h3><p>Оформление Instagram и Telegram-канала, тексты для постов и реклама, чтобы о вас узнали.</p>
+        <div class="price"><b>от 800 000 сум</b><span>в месяц</span></div></div>
+      <div class="svc hud rv"><div class="top"><div class="ico"><svg><use href="#i-search"/></svg></div><span class="ticks"><i></i><i></i></span></div>
+        <h3>Запуск в Google и на картах</h3><p>Размещаю сайт в интернете, подключаю к Google, Яндекс Картам и 2GIS, чтобы вас находили.</p>
+        <div class="price"><b>в подарок</b><span>к любому сайту</span></div></div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="head rv">
+      <div><div class="eyebrow"><span class="ticks"><i></i><i></i><i></i></span>Как работаем</div><h2>От идеи до запуска</h2></div>
+      <p>Вы видите результат на каждом шаге и платите за понятный итог.</p>
+    </div>
+    <div class="steps">
+      <div class="step glass rv"><div class="num">01</div><h3>Разговор</h3><p>Узнаю о вашем бизнесе, клиентах и что должен делать сайт.</p><span class="when">День 1</span></div>
+      <div class="step glass rv"><div class="num">02</div><h3>Дизайн</h3><p>Показываю, как будет выглядеть сайт. Правим, пока не понравится.</p><span class="when">Дни 2–3</span></div>
+      <div class="step glass rv"><div class="num">03</div><h3>Сборка</h3><p>Делаю сайт и проверяю на телефоне и компьютере.</p><span class="when">Дни 3–6</span></div>
+      <div class="step glass rv"><div class="num">04</div><h3>Запуск</h3><p>Размещаю в интернете, подключаю к Google и картам.</p><span class="when">День 7</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head rv"><div><div class="eyebrow"><span class="ticks"><i></i><i></i><i></i></span>Почему я</div><h2>Что вы получаете</h2></div></div>
+    <div class="why">
+      <div class="big glass rv"><div><h3>Сайт, созданный для телефона</h3><p>Большинство ваших клиентов зайдут с телефона. Поэтому сначала делаю удобно там, а потом на компьютере.</p></div><div class="phone"><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="sm glass rv"><div class="ico"><svg><use href="#i-chat"/></svg></div><h3>Заявки в Telegram</h3><p>Кнопки ведут сразу в ваш Telegram или на звонок. Клиенту не нужно ничего заполнять.</p></div>
+      <div class="sm glass rv"><div class="ico"><svg><use href="#i-globe"/></svg></div><h3>На двух языках</h3><p>Русская и узбекская версии, чтобы сайт понимали все ваши покупатели.</p></div>
+      <div class="sm glass rv"><div class="ico"><svg><use href="#i-bolt"/></svg></div><h3>Быстрая загрузка</h3><p>Сайт открывается за секунду даже на мобильном интернете.</p></div>
+      <div class="sm glass rv"><div class="ico"><svg><use href="#i-search"/></svg></div><h3>Видно в поиске</h3><p>Настраиваю, чтобы вас находили в Google и на картах города.</p></div>
+    </div>
+  </section>
+
+  <div class="contact hud rv" id="contact">
+    <div>
+      <div class="eyebrow"><span class="ticks"><i></i><i></i><i></i></span>Контакты</div>
+      <h2 style="margin-top:14px">Давайте сделаем ваш сайт</h2>
+      <p>Напишите, чем вы занимаетесь, и я предложу, какой сайт вам подойдёт и сколько он будет стоить. Консультация бесплатная.</p>
+    </div>
+    <div class="chans">
+      <a class="chan" href="https://t.me/omad_web" target="_blank" rel="noopener"><span class="ic" style="background:linear-gradient(135deg,#2AABEE,#1E88D0)"><svg><use href="#i-tg"/></svg></span><span><small>Telegram</small><b>@omad_web</b></span><svg class="go" width="18" height="18"><use href="#i-arrow"/></svg></a>
+      <a class="chan" href="tel:+998948860912"><span class="ic" style="background:linear-gradient(135deg,#3DDC84,#1E9E5A)"><svg style="color:#fff"><use href="#i-phone"/></svg></span><span><small>Телефон</small><b>+998 94 886 09 12</b></span><svg class="go" width="18" height="18"><use href="#i-arrow"/></svg></a>
+      <a class="chan" href="https://www.instagram.com/omad_web/" target="_blank" rel="noopener"><span class="ic" style="background:linear-gradient(135deg,#FEDA75,#D62976 50%,#4F5BD5)"><svg><use href="#i-insta"/></svg></span><span><small>Instagram</small><b>@omad_web</b></span><svg class="go" width="18" height="18"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+
+  <footer><span>© 2026 Omad Web Studio · Ташкент</span><span>Сайты · Лендинги · Продвижение</span></footer>
+</div>
+
+<nav class="dock glass" aria-label="Быстрое меню">
+  <a href="#top"><svg><use href="#i-home"/></svg>Главная</a>
+  <a href="#works"><svg><use href="#i-grid"/></svg>Работы</a>
+  <a href="#contact" class="main"><svg><use href="#i-send"/></svg>Написать</a>
+  <a href="#services"><svg><use href="#i-layers"/></svg>Цены</a>
+</nav>
+
+<script>
+(function(){
+  const car=document.getElementById('car'), cards=[...car.querySelectorAll('.card')], dots=document.getElementById('dots');
+  let i=1;
+  cards.forEach(()=>dots.appendChild(document.createElement('i')));
+  function render(){
+    const n=cards.length, step=window.innerWidth<620?58:72;
+    cards.forEach((c,k)=>{
+      let o=k-i; if(o>n/2)o-=n; if(o<-n/2)o+=n;
+      const a=Math.abs(o);
+      c.style.transform=`translateX(${o*step}%) translateZ(${-a*160}px) rotateY(${-o*24}deg)`;
+      c.style.zIndex=10-a; c.style.opacity=a>2?0:1-a*.18; c.style.filter=a?`brightness(${1-a*.25})`:'none';
+      c.style.pointerEvents=a>2?'none':'auto';
+      c.onclick=()=>{if(o){i=k;render();}};
+    });
+    [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
+  }
+  const go=s=>{i=(i+s+cards.length)%cards.length;render()};
+  document.getElementById('prev').onclick=()=>go(-1);
+  document.getElementById('next').onclick=()=>go(1);
+  car.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowRight')go(1)});
+  let x0=null;
+  car.addEventListener('pointerdown',e=>x0=e.clientX);
+  car.addEventListener('pointerup',e=>{if(x0!==null&&Math.abs(e.clientX-x0)>40)go(e.clientX<x0?1:-1);x0=null});
+  window.addEventListener('resize',render);
+  render();
+})();
+if(!('IntersectionObserver' in window)){document.documentElement.classList.remove('js')}else{
+setTimeout(()=>document.querySelectorAll('.rv').forEach(e=>e.classList.add('in')),2500);
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach((el,k)=>{el.style.transitionDelay=(k%4)*80+'ms';io.observe(el)});}
+</script>
+</body>
+</html>
